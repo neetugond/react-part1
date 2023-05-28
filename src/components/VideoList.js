@@ -3,7 +3,7 @@ import PlayButton from './PlayButton'
 // sibling to sibling - from sibling to parent anf than parent to another sibling
 // if this code was in parent component than it is child to parent 
 // from parent videos is pass as a prop and access here as a parameter
-function VideoList({ videos,deleteVideo, editVideo}) {
+function VideoList({ videos,dispatch, editVideo}) {
     return (
         <>
        {videos.map((video) => (
@@ -15,7 +15,7 @@ function VideoList({ videos,deleteVideo, editVideo}) {
           channel={video.channel}
           verified={video.verified}
            id={video.id}
-           deleteVideo={deleteVideo}
+           dispatch={dispatch}
            editVideo={editVideo}
         >
           <PlayButton

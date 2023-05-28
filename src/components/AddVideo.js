@@ -9,7 +9,7 @@ const initialState = {
     views: ""
 }
 // 4 .taking function as prop
-function AddVideo({ addVideosProp,updateVideo, editableVideo }) {
+function AddVideo({ dispatch,editableVideo }) {
  
     // state lifting - child component state pass as a prop in parent component and than from than in child component props come as a parameter and function call
     // 1. pass this state- video in parent component
@@ -18,10 +18,10 @@ function AddVideo({ addVideosProp,updateVideo, editableVideo }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (editableVideo) {
-            updateVideo(video)
+            dispatch({ type: 'UPDATE', payload: video})
         } else {
              // 5.  getting data from parent
-        addVideosProp(video)
+             dispatch({ type: 'ADD', payload: video })
         }
        
  // console.log(video)
