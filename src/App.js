@@ -18,11 +18,23 @@ function App() {
 
     ])
   }
+  function deleteVideo(id) {
+    // only delete id will not match other than that all id will match so, all other id will filter and come into new array
+    // render new array
+    setVideos(
+      videos.filter(el=>el.id !==id)
+    )
+    
+    console.log(id)
+  }
+
+  
   return (
     <div className="App" onClick={() => console.log('App')}>
       {/* 3. add addVideosProp as a prop */}
       <AddVideo addVideosProp={addVideosProp} />
-     <VideoList videos={videos}></VideoList>
+      <VideoList deleteVideo={deleteVideo} videos={videos}></VideoList>
+      
 
     </div>
   );

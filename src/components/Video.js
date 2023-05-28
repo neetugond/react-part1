@@ -1,12 +1,13 @@
 import './Video.css';
 
-function Video({title,id,channel="Neetu tech",views,time,verified,children}) {
+function Video({title,id,channel="Neetu tech",views,time,verified,children,deleteVideo}) {
   console.log('render Video')
 
   
   return (
       <>
       <div className='container'>
+        <button className='close' onClick={()=>deleteVideo(id)}>X</button>
       <div className="pic">
       <img src={`https://picsum.photos/id/${id}/160/90`} alt="Katherine Johnson" />
       </div>
