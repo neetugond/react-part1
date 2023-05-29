@@ -1,9 +1,10 @@
-import { useContext, useReducer, useState } from 'react';
+import { useReducer, useState } from 'react';
 import './App.css';
 import videoDB from './data/data';
 import AddVideo from './components/AddVideo';
 import VideoList from './components/VideoList';
 import ThemeContext from './context/ThemeContext';
+import VideosContext from './context/VideosContext';
 function App() {
   console.log('render App')
 
@@ -40,28 +41,30 @@ function App() {
   // 1st initial state and dispatch - it will give facibility to manipulate videos
   // 1st argument reducer function 2nd - data
   const [videos, dispatch] = useReducer(videoReducer, videoDB)
-  
+
   // by usestate we can direct change the state
   const [mode, setMode] = useState('darkMode')
-  
+
   function editVideo(id) {
     setEditableVideo(videos.find(el => el.id === id))
 
   }
 
   return (
-    <ThemeContext.Provider value='{theme}'>
-    <div className={`App ${mode}`} onClick={() => console.log('App')}>
+    <ThemeContext.Provider value={mode}>
+      <VideosContext.Provider value={videos}>
+      <div className={`App ${mode}`} onClick={() => console.log('App')}>
         {/* 3. add addVideosProp as a prop */}
-        <button onClick={()=>setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode' )}>mode</button>
-      <AddVideo dispatch={dispatch} editableVideo={editableVideo} />
-      <VideoList dispatch={dispatch} editVideo={editVideo} videos={videos}></VideoList>
+        <button onClick={() => setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode')}>mode</button>
+        <AddVideo dispatch={dispatch} editableVideo={editableVideo} />
+          <VideoList dispatch={dispatch} editVideo={editVideo}></VideoList>
 
 
-      </div>
-      </ThemeContext.Provider>
-      );
-      
+        </div>
+        </VideosContext.Provider>
+    </ThemeContext.Provider>
+  );
+
 }
 
 export default App;
