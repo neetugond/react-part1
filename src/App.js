@@ -1,20 +1,22 @@
-import { useReducer, useState } from 'react';
+import { useContext, useReducer, useState } from 'react';
 import './App.css';
 import videoDB from './data/data';
 import AddVideo from './components/AddVideo';
 import VideoList from './components/VideoList';
+import ThemeContext from './context/ThemeContext';
 function App() {
   console.log('render App')
+
   const [editableVideo, setEditableVideo] = useState(null)
   //use reducer - it is for state management like redux 
-// state - video, action
+  // state - video, action
   function videoReducer(videos, action) {
     switch (action.type) {
       case 'ADD':
         return [
-          ...videos, 
+          ...videos,
           {
-            ...action.payload, 
+            ...action.payload,
             id: videos.length + 1
           }
         ]
@@ -39,20 +41,26 @@ function App() {
   // 1st argument reducer function 2nd - data
   const [videos, dispatch] = useReducer(videoReducer, videoDB)
   
+  // 2
+  const themeContext = useContext(ThemeContext)
+  console.log({ themeContext })
+  
+  
   function editVideo(id) {
     setEditableVideo(videos.find(el => el.id === id))
 
   }
 
   return (
-    <div className="App" onClick={() => console.log('App')}>
+    <div className={`App ${themeContext}`} onClick={() => console.log('App')}>
       {/* 3. add addVideosProp as a prop */}
       <AddVideo dispatch={dispatch} editableVideo={editableVideo} />
       <VideoList dispatch={dispatch} editVideo={editVideo} videos={videos}></VideoList>
 
 
-    </div>
-  );
+      </div>
+      );
+      
 }
 
 export default App;

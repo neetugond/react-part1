@@ -1,7 +1,4 @@
-.dark{
-    background-color: gray;
-    color:white;
-}
+
 
 .container{
     width:15em;
@@ -9,17 +6,42 @@
     float: left;
     position:relative;
 }
+.container .darkMode{
+color: yellowgreen;
+}
+.container .lightMode{
+  color: black;
+  }
+button.darkMode, .darkMode button{
+  background-color: black;
+  border: 1px solid yellowgreen;
+  color: white;
+}
+button.lightMode, .lightMode button{
+  background-color: rgb(173, 172, 172);
+  border: 1px solid black;
+  color: black;
+}
   .pic img{
     width: 100%;
+  }
+  .darkMode .title,  
+  .darkMode .channel,  
+  .darkMode .views{
+    color: yellowgreen;
+  }
+  .lightMode .title,  
+  .lightMode .channel,  
+  .lightMode .views{
+    color: black;
   }
   .title{
     font-weight: bold;
     margin-bottom: 1em;
-    color:white
   }
   .channel, .views{
     font-size: small;
-    color:#ccc;
+    /* color:#ccc; */
     margin-bottom: 0.2em;
   }
   
