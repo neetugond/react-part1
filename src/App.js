@@ -41,10 +41,8 @@ function App() {
   // 1st argument reducer function 2nd - data
   const [videos, dispatch] = useReducer(videoReducer, videoDB)
   
-  // 2
-  const themeContext = useContext(ThemeContext)
-  console.log({ themeContext })
-  
+  // by usestate we can direct change the state
+  const [mode, setMode] = useState('darkMode')
   
   function editVideo(id) {
     setEditableVideo(videos.find(el => el.id === id))
@@ -52,13 +50,16 @@ function App() {
   }
 
   return (
-    <div className={`App ${themeContext}`} onClick={() => console.log('App')}>
-      {/* 3. add addVideosProp as a prop */}
+    <ThemeContext.Provider value='{theme}'>
+    <div className={`App ${mode}`} onClick={() => console.log('App')}>
+        {/* 3. add addVideosProp as a prop */}
+        <button onClick={()=>setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode' )}>mode</button>
       <AddVideo dispatch={dispatch} editableVideo={editableVideo} />
       <VideoList dispatch={dispatch} editVideo={editVideo} videos={videos}></VideoList>
 
 
       </div>
+      </ThemeContext.Provider>
       );
       
 }
