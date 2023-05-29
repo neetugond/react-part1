@@ -1,10 +1,10 @@
-import ThemeContext from '../context/ThemeContext';
+import useTheme from '../hooks/Theme';
 import './PlayButton.css';
-import { useContext, useState } from 'react';
+import {useState } from 'react';
 
 function PlayButton({message,children,onPlay,onPause}){
     console.log('render PlayButton')
-const theme = useContext(ThemeContext)
+const theme = useTheme
     const [playing, setPlaying] = useState(false);  
     function handleClick(e){
         // console.log(e)
