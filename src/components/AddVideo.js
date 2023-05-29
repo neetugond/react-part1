@@ -1,5 +1,6 @@
+import VideoDispatchContext from '../context/VideoDispatchContext';
 import './AddVideo.css'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const initialState = {
     time: '1 month ago',
@@ -9,12 +10,12 @@ const initialState = {
     views: ""
 }
 // 4 .taking function as prop
-function AddVideo({ dispatch,editableVideo }) {
+function AddVideo({editableVideo }) {
  
     // state lifting - child component state pass as a prop in parent component and than from than in child component props come as a parameter and function call
     // 1. pass this state- video in parent component
     const [video, setVideo] = useState(initialState);
-    
+    const dispatch = useContext(VideoDispatchContext)
     const handleSubmit = (e) => {
         e.preventDefault()
         if (editableVideo) {

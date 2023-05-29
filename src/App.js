@@ -5,6 +5,7 @@ import AddVideo from './components/AddVideo';
 import VideoList from './components/VideoList';
 import ThemeContext from './context/ThemeContext';
 import VideosContext from './context/VideosContext';
+import VideoDispatchContext from './context/VideoDispatchContext';
 function App() {
   console.log('render App')
 
@@ -40,6 +41,8 @@ function App() {
   }
   // 1st initial state and dispatch - it will give facibility to manipulate videos
   // 1st argument reducer function 2nd - data
+
+  // 2. taking value from here
   const [videos, dispatch] = useReducer(videoReducer, videoDB)
 
   // by usestate we can direct change the state
@@ -51,17 +54,18 @@ function App() {
   }
 
   return (
+    // 1 where you want to display till there value become global
     <ThemeContext.Provider value={mode}>
       <VideosContext.Provider value={videos}>
-      <div className={`App ${mode}`} onClick={() => console.log('App')}>
-        {/* 3. add addVideosProp as a prop */}
-        <button onClick={() => setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode')}>mode</button>
-        <AddVideo dispatch={dispatch} editableVideo={editableVideo} />
-          <VideoList dispatch={dispatch} editVideo={editVideo}></VideoList>
-
-
-        </div>
-        </VideosContext.Provider>
+        <VideoDispatchContext.Provider value={dispatch}>
+          <div className={`App ${mode}`} onClick={() => console.log('App')}>
+            {/* 3. add addVideosProp as a prop */}
+            <button onClick={() => setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode')}>mode</button>
+            <AddVideo editableVideo={editableVideo} />
+            <VideoList editVideo={editVideo} />
+          </div>
+        </VideoDispatchContext.Provider>
+      </VideosContext.Provider>
     </ThemeContext.Provider>
   );
 

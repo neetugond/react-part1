@@ -5,7 +5,7 @@ import VideosContext from '../context/VideosContext'
 // sibling to sibling - from sibling to parent anf than parent to another sibling
 // if this code was in parent component than it is child to parent 
 // from parent videos is pass as a prop and access here as a parameter
-function VideoList({ dispatch, editVideo }) {
+function VideoList({editVideo }) {
   const videos = useContext(VideosContext)
     return (
         <>
@@ -18,7 +18,6 @@ function VideoList({ dispatch, editVideo }) {
           channel={video.channel}
           verified={video.verified}
            id={video.id}
-           dispatch={dispatch}
            editVideo={editVideo}
         >
           <PlayButton
