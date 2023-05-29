@@ -6,7 +6,7 @@ function Video({ title, id, channel = "Neetu tech", views, time, verified, child
   console.log('render Video')
   const theme = useTheme
   const dispatch = useVideoDispatch()
-
+ 
   return (
     <>
       <div className={`container ${theme}`}>

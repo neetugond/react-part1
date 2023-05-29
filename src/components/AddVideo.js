@@ -1,6 +1,6 @@
 import useVideoDispatch from '../hooks/VideoDispatch';
 import './AddVideo.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const initialState = {
     time: '1 month ago',
@@ -17,7 +17,8 @@ function AddVideo({editableVideo }) {
     const [video, setVideo] = useState(initialState);
     // custom hook use here istead of dispatch
     const dispatch = useVideoDispatch()
-
+    // 1 initialize the value null
+    const inputRef = useRef(null)
     const handleSubmit = (e) => {
         e.preventDefault()
         if (editableVideo) {
@@ -48,14 +49,26 @@ function AddVideo({editableVideo }) {
     useEffect(() => {
         if (editableVideo) {
             setVideo(editableVideo)  
+            
         }
+        // value can access here
+        // value.current
+        inputRef.current.focus()
+        // // example  just for logic where can we use useRef, not for use
+        // "type here".split('').forEach((char, i) => {
+        //     setTimeout(() => {
+        //         inputRef.current.placeholder = inputRef.current.placeholder+char
+        //     }, 200*i)
+        // })
        
     },[editableVideo])
     return (
         <>
             <form>
                 {/* define name is here as a title */}
-                <input onChange={handleChange}
+                {/*always ref name only use - data (inputRef) will push into ref */}
+                {/* 2 use the value */}
+                <input ref={inputRef} onChange={handleChange}
                     name='title' type="text" placeholder='title' value={video.title} />
                 <input onChange={handleChange} name='views' type="text" placeholder='view'value={video.views} />
                 <button onClick={handleSubmit}>

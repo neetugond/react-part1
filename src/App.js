@@ -61,7 +61,7 @@ function App() {
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
           <div className={`App ${mode}`} onClick={() => console.log('App')}>
-            <Counter />
+            {/* <Counter /> */}
             {/* 3. add addVideosProp as a prop */}
             <button onClick={() => setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode')}>mode</button>
             <AddVideo editableVideo={editableVideo} />
