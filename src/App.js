@@ -6,6 +6,7 @@ import VideoList from './components/VideoList';
 import ThemeContext from './context/ThemeContext';
 import VideosContext from './context/VideosContext';
 import VideoDispatchContext from './context/VideoDispatchContext';
+import Counter from './components/counter/Counter';
 function App() {
   console.log('render App')
 
@@ -54,11 +55,13 @@ function App() {
   }
 
   return (
+
     // 1 where you want to display till there value become global
     <ThemeContext.Provider value={mode}>
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
           <div className={`App ${mode}`} onClick={() => console.log('App')}>
+            <Counter />
             {/* 3. add addVideosProp as a prop */}
             <button onClick={() => setMode(mode === 'darkMode' ? 'lightMode' : 'darkMode')}>mode</button>
             <AddVideo editableVideo={editableVideo} />
